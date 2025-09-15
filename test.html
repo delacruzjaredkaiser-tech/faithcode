@@ -1,0 +1,17 @@
+
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><title>Function Test</title></head>
+<body>
+<h1>fetch-esv function test</h1>
+<p>Try a reference (e.g., John 3:16):</p>
+<input id="ref" value="John 3:16" size="30"/>
+<button id="go">Fetch</button>
+<pre id="out"></pre>
+<script>
+document.getElementById('go').onclick = async () => {
+  const ref = document.getElementById('ref').value;
+  const res = await fetch('/.netlify/functions/fetch-esv?ref=' + encodeURIComponent(ref));
+  document.getElementById('out').textContent = await res.text();
+};
+</script>
+</body></html>
