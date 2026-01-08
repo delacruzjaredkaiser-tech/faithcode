@@ -17,7 +17,6 @@
   *{box-sizing:border-box}
   html, body { height: 100%; }
 
-  /* Always centered, but still scrollable if needed */
   body{
     margin:0;
     font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
@@ -35,7 +34,6 @@
     overflow-y: auto;
   }
 
-  /* Card stays centered; if verse is very long, card scrolls internally */
   .card{
     width: min(900px, 100%);
     margin: 0 auto;
@@ -45,7 +43,7 @@
     padding:24px 18px;
     box-shadow: 0 24px 60px rgba(25, 72, 140, 0.14);
 
-    max-height: 92dvh;      /* simple + reliable across browsers */
+    max-height: 92dvh;
     overflow: auto;
     -webkit-overflow-scrolling: touch;
   }
@@ -60,7 +58,6 @@
     flex: 1 1 320px;
   }
 
-  /* New logo sizing (responsive, crisp) */
   .logo{
     width: clamp(44px, 7vw, 64px);
     height: clamp(44px, 7vw, 64px);
@@ -86,21 +83,14 @@
   .ref{color:var(--blue);font-weight:800;margin-bottom:8px;letter-spacing:0.3px; overflow-wrap:anywhere;}
 
   .verse{
-  margin: 10px 0 8px;
-  font-size: clamp(1.05rem, 2.6vw, 1.6rem);
-  line-height: 1.7;
-
-  /* KEY CHANGE: don't preserve odd line breaks */
-  white-space: normal;
-
-  /* Clean wrapping */
-  overflow-wrap: anywhere;
-  word-break: normal;
-
-  /* Optional: looks nicer in paragraphs */
-  text-wrap: pretty;
-}
-
+    margin: 10px 0 8px;
+    font-size: clamp(1.05rem, 2.6vw, 1.6rem);
+    line-height: 1.7;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    word-break: normal;
+    text-wrap: pretty;
+  }
 
   .tr{font-size:0.92rem;color:var(--muted)}
   .actions{display:flex;gap:10px;flex-wrap:wrap; margin-top:12px}
@@ -124,7 +114,6 @@
   <main class="card" role="main">
     <header>
       <div class="brandbox">
-        <!-- UPDATED LOGO PATH -->
         <img class="logo" src="./assets/faithcode_logo.png" alt="FaithCode logo"/>
         <div>
           <h1 aria-live="polite">FaithCode • Verse of the Day</h1>
@@ -161,12 +150,29 @@
 
   const references = ["John 3:16", "Romans 10:9", "Ephesians 2:8-9", "Acts 4:12", "John 14:6", "2 Corinthians 5:17", "Romans 5:8", "Romans 6:23", "John 1:12", "Titus 3:5", "1 Peter 1:3", "Romans 8:1", "1 John 5:11-12", "John 5:24", "Galatians 2:20", "John 10:10", "Hebrews 7:25", "Romans 8:38-39", "1 John 1:9", "Psalm 103:12", "Isaiah 1:18", "Micah 7:18-19", "Ephesians 1:7", "Colossians 1:13-14", "Hebrews 8:12", "Acts 3:19", "Isaiah 43:25", "Psalm 32:1-2", "Proverbs 28:13", "Matthew 6:12", "Isaiah 53:5", "1 Peter 2:24", "Jeremiah 17:14", "Psalm 147:3", "James 5:14-15", "Psalm 103:2-3", "Exodus 15:26", "Psalm 41:3", "3 John 1:2", "Matthew 9:35", "Mark 5:34", "Malachi 4:2", "Jeremiah 29:11", "Romans 8:28", "Hebrews 10:23", "Romans 15:13", "Isaiah 40:31", "Psalm 46:1", "Joshua 1:9", "Lamentations 3:22-23", "Psalm 27:1", "Psalm 121:1-2", "Philippians 4:6-7", "Psalm 34:17-18", "Philippians 4:13", "Isaiah 41:10", "Deuteronomy 31:6", "2 Timothy 1:7", "Psalm 55:22", "1 Peter 5:7", "1 Corinthians 13:4-7", "1 John 4:7-8", "Romans 5:5", "John 13:34-35", "Colossians 3:14", "1 Corinthians 16:14", "Romans 12:9-10", "1 Peter 4:8", "Ephesians 4:2", "Galatians 5:22-23", "John 15:12", "Proverbs 10:12", "Psalm 119:105", "Matthew 11:28", "Proverbs 3:5-6", "Matthew 6:33", "James 1:5", "Hebrews 4:16", "Matthew 5:16", "Colossians 3:23", "Hebrews 12:2", "Psalm 37:4", "Ephesians 3:20", "Psalm 118:24", "Matthew 19:26", "Mark 9:23", "Luke 1:37", "John 16:33", "Romans 12:2", "2 Corinthians 12:9", "Psalm 23:1", "Psalm 23:4", "Psalm 91:1-2", "Psalm 91:9-11", "Psalm 84:11", "Psalm 34:8", "Psalm 20:7", "Psalm 1:1-3", "Proverbs 18:10", "Proverbs 16:3", "Proverbs 3:9-10", "Isaiah 26:3", "Isaiah 43:2", "Isaiah 55:6-7", "Isaiah 61:1", "Jeremiah 33:3", "Joel 2:32", "Habakkuk 3:17-19", "Zephaniah 3:17", "Matthew 7:7", "Matthew 28:19-20", "Mark 12:30-31", "Luke 6:38", "Luke 11:9-10", "John 1:1", "John 8:12", "John 11:25-26", "John 15:5", "Acts 1:8", "Acts 2:21", "Romans 1:16", "Romans 3:23-24", "Romans 8:31", "Romans 10:13", "1 Corinthians 1:18", "1 Corinthians 10:13", "2 Corinthians 4:16-18", "Galatians 6:9", "Ephesians 6:10-11", "Philippians 1:6", "Philippians 4:19", "Colossians 2:6-7", "1 Thessalonians 5:16-18", "2 Thessalonians 3:3", "1 Timothy 6:12", "2 Timothy 3:16-17", "Titus 2:11-12", "Philemon 1:6", "Hebrews 11:1", "Hebrews 12:1-2", "James 1:2-3", "James 4:8", "1 Peter 2:9", "1 Peter 3:15", "2 Peter 1:3-4", "1 John 3:1", "1 John 4:18-19", "Jude 1:24-25", "Revelation 3:20", "Revelation 21:4", "Revelation 22:17"];
 
-  // ---------- UI helpers ----------
+  // --- NEW: normalize text so it doesn't look jagged ---
+  function normalizeVerseText(text){
+    if(!text) return text;
+    let t = String(text).replace(/\r\n/g, "\n");
+    t = t.replace(/[ \t]*\n[ \t]*/g, " ");
+    t = t.replace(/\s{2,}/g, " ").trim();
+    return t;
+  }
+
+  // --- NEW: read ref from URL for QR / permalinks ---
+  function getReferenceFromUrl(){
+    const params = new URLSearchParams(location.search);
+    const ref = params.get("ref");
+    return ref ? ref.trim() : null;
+  }
+
   function render({ text, reference, label, noteText, copyrightText }){
     const verseEl = document.getElementById("verse");
     const refEl = document.getElementById("ref");
     const trEl = document.getElementById("trNote");
-    verseEl.textContent = text ? text : "Tap the buttons below to read the full passage.";
+
+    const cleaned = text ? normalizeVerseText(text) : null;
+    verseEl.textContent = cleaned ? cleaned : "Tap the buttons below to read the full passage.";
     refEl.textContent = `${reference} • ${label}`;
     trEl.textContent = copyrightText || noteText || "";
   }
@@ -176,7 +182,6 @@
     return `https://www.biblegateway.com/passage/?search=${encodeURIComponent(reference)}&version=${vmap[version] || 'ESV'}`;
   }
 
-  // ---------- Timezone-safe date + day-of-year ----------
   function getManilaDate(){
     const now = new Date();
     const pretty = new Intl.DateTimeFormat(undefined,{ timeZone: FIXED_TIMEZONE, dateStyle:'full'}).format(now);
@@ -206,7 +211,6 @@
     return references[idx];
   }
 
-  // ---------- Safe fetch with timeout ----------
   async function safeFetch(url, opts = {}, timeoutMs = 9000){
     const ctrl = new AbortController();
     const t = setTimeout(() => ctrl.abort(), timeoutMs);
@@ -246,11 +250,12 @@
   async function showToday(translation = DEFAULT_TRANSLATION){
     document.getElementById("date").textContent = getManilaDate().pretty;
 
-    const reference = pickReference();
+    // --- UPDATED: QR fixed verse if ?ref= exists, otherwise daily verse ---
+    const reference = getReferenceFromUrl() || pickReference();
+
     document.getElementById("openESV").href = bibleGatewayUrl(reference, 'esv');
     document.getElementById("openNKJV").href = bibleGatewayUrl(reference, 'nkjv');
 
-    // Always show something (even if APIs fail)
     render({
       text: "Loading…",
       reference,
@@ -280,7 +285,6 @@
 
       render({ text, reference, label, noteText, copyrightText });
     } catch (e){
-      // Final fallback (prevents infinite Loading state)
       render({
         text: "Text unavailable right now. Tap “Open in ESV” or “Open in NKJV” to read the passage.",
         reference,
@@ -336,7 +340,7 @@
     const tr = (urlTr || DEFAULT_TRANSLATION).toLowerCase();
     showToday(tr);
   })();
-</script>
+  </script>
 
 </body>
 </html>
