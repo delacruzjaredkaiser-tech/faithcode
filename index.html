@@ -1,3 +1,4 @@
+/* this is update 1 jan12026
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,34 +9,124 @@
   <link rel="icon" href="./favicon.ico" sizes="16x16 32x32"/>
   <link rel="apple-touch-icon" href="./apple-touch-icon.png"/>
   <link rel="icon" type="image/png" href="./favicon.png">
-  <style>
-    :root{ --bg1:#E9F2FF; --bg2:#F2FBFF; --halo1:#D9E9FF; --halo2:#D3F6EA; --ink:#0E1424; --muted:#4A5370; --blue:#2F80ED; --green:#2DBF6E; --card:#FFFFFF; }
-    *{box-sizing:border-box} html, body { height: 100%; }
-    body{ margin:0; font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; color:var(--ink);
-      background: radial-gradient(1200px 700px at 25% -10%, var(--halo1) 0%, transparent 60%), radial-gradient(1000px 650px at 115% 0%, var(--halo2) 0%, transparent 55%), linear-gradient(180deg, var(--bg1), var(--bg2));
-      padding: 20px; min-height: 100vh; }
-    .card{ width:min(900px, 100%); margin: 0 auto; background: var(--card); border:1px solid #E4EBF7; border-radius:24px; padding:24px 18px; box-shadow: 0 24px 60px rgba(25, 72, 140, 0.14); }
-    header{display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:6px; flex-wrap:wrap;}
-    .brandbox{display:flex;align-items:center;gap:12px; min-width: 240px;}
-    .logo{width:52px;height:52px;border-radius:12px;object-fit:cover}
-    h1{font-size:clamp(1.1rem, 2vw, 1.4rem);margin:0;letter-spacing:0.2px}
-    .date{color:var(--muted);font-size:0.95rem}
-    .chip{display:inline-block; padding:6px 12px; border-radius:999px; font-size:0.85rem; font-weight:700; background:linear-gradient(90deg, var(--blue), var(--green)); color:white; white-space:nowrap;}
-    .divider{height:1px; background:linear-gradient(90deg, transparent, rgba(124,138,165,0.35), transparent); margin:10px 0 12px;}
-    .ref{color:var(--blue);font-weight:800;margin-bottom:8px;letter-spacing:0.3px}
-    .verse{ margin:10px 0 8px; font-size:clamp(1.05rem, 2.6vw, 1.6rem); line-height:1.7; white-space:pre-wrap; overflow-wrap:anywhere; }
-    .tr{font-size:0.92rem;color:var(--muted)}
-    .actions{display:flex;gap:10px;flex-wrap:wrap; margin-top:12px}
-    button, a.btn{ border:1px solid #D7E3F7; background:linear-gradient(180deg, #FFFFFF, #F6FAFF); color:var(--ink); padding:10px 14px;border-radius:12px; cursor:pointer;font-weight:700;text-decoration:none; }
-    .foot{margin-top:16px;color:var(--muted);font-size:0.95rem}
-    .foot a{color:#2F80ED;text-decoration:none} .foot a:hover{text-decoration:underline}
-  </style>
+
+<style>
+  :root{
+    --bg1:#E9F2FF; --bg2:#F2FBFF; --halo1:#D9E9FF; --halo2:#D3F6EA;
+    --ink:#0E1424; --muted:#4A5370; --blue:#2F80ED; --green:#2DBF6E; --card:#FFFFFF;
+  }
+  *{box-sizing:border-box}
+  html, body { height: 100%; }
+
+  /* Always centered, but still scrollable if needed */
+  body{
+    margin:0;
+    font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+    color:var(--ink);
+    background:
+      radial-gradient(1200px 700px at 25% -10%, var(--halo1) 0%, transparent 60%),
+      radial-gradient(1000px 650px at 115% 0%, var(--halo2) 0%, transparent 55%),
+      linear-gradient(180deg, var(--bg1), var(--bg2));
+
+    min-height: 100dvh;
+    padding: clamp(14px, 3vw, 28px);
+
+    display: grid;
+    place-items: center;
+    overflow-y: auto;
+  }
+
+  /* Card stays centered; if verse is very long, card scrolls internally */
+  .card{
+    width: min(900px, 100%);
+    margin: 0 auto;
+    background: var(--card);
+    border:1px solid #E4EBF7;
+    border-radius:24px;
+    padding:24px 18px;
+    box-shadow: 0 24px 60px rgba(25, 72, 140, 0.14);
+
+    max-height: 92dvh;      /* simple + reliable across browsers */
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  header{
+    display:flex; align-items:center; justify-content:space-between;
+    gap:12px; margin-bottom:6px; flex-wrap:wrap;
+  }
+  .brandbox{
+    display:flex; align-items:center; gap:12px;
+    min-width: 240px;
+    flex: 1 1 320px;
+  }
+
+  /* New logo sizing (responsive, crisp) */
+  .logo{
+    width: clamp(44px, 7vw, 64px);
+    height: clamp(44px, 7vw, 64px);
+    border-radius:12px;
+    object-fit: contain;
+    background: transparent;
+  }
+
+  h1{font-size:clamp(1.1rem, 2vw, 1.4rem);margin:0;letter-spacing:0.2px}
+  .date{color:var(--muted);font-size:0.95rem}
+  .chip{
+    display:inline-block; padding:6px 12px; border-radius:999px;
+    font-size:0.85rem; font-weight:700;
+    background:linear-gradient(90deg, var(--blue), var(--green));
+    color:white;
+    white-space:nowrap;
+  }
+  @media (max-width: 520px){
+    .chip{ width:100%; text-align:center; white-space:normal; }
+  }
+
+  .divider{height:1px; background:linear-gradient(90deg, transparent, rgba(124,138,165,0.35), transparent); margin:10px 0 12px;}
+  .ref{color:var(--blue);font-weight:800;margin-bottom:8px;letter-spacing:0.3px; overflow-wrap:anywhere;}
+
+  .verse{
+  margin: 10px 0 8px;
+  font-size: clamp(1.05rem, 2.6vw, 1.6rem);
+  line-height: 1.7;
+
+  /* KEY CHANGE: don't preserve odd line breaks */
+  white-space: normal;
+
+  /* Clean wrapping */
+  overflow-wrap: anywhere;
+  word-break: normal;
+
+  /* Optional: looks nicer in paragraphs */
+  text-wrap: pretty;
+}
+
+
+  .tr{font-size:0.92rem;color:var(--muted)}
+  .actions{display:flex;gap:10px;flex-wrap:wrap; margin-top:12px}
+  button, a.btn{
+    border:1px solid #D7E3F7;
+    background:linear-gradient(180deg, #FFFFFF, #F6FAFF);
+    color:var(--ink);
+    padding:10px 14px;border-radius:12px;
+    cursor:pointer;font-weight:700;text-decoration:none;
+  }
+  @media (max-width: 520px){
+    button, a.btn{ width:100%; text-align:center; }
+  }
+  .foot{margin-top:16px;color:var(--muted);font-size:0.95rem}
+  .foot a{color:#2F80ED;text-decoration:none} .foot a:hover{text-decoration:underline}
+</style>
+
 </head>
+
 <body>
   <main class="card" role="main">
     <header>
       <div class="brandbox">
-        <img class="logo" src="./assets/logo.png" alt="FaithCode logo"/>
+        <!-- UPDATED LOGO PATH -->
+        <img class="logo" src="./assets/faithcode_logo.png" alt="FaithCode logo"/>
         <div>
           <h1 aria-live="polite">FaithCode • Verse of the Day</h1>
           <div class="date" id="date"></div>
@@ -65,67 +156,111 @@
   </main>
 
   <script>
-    const DEFAULT_TRANSLATION = "esv";
-    const TRANSLATIONS = ["esv","kjv"];
-    const FIXED_TIMEZONE = "Asia/Manila";
+  const DEFAULT_TRANSLATION = "esv";
+  const TRANSLATIONS = ["esv","kjv"];
+  const FIXED_TIMEZONE = "Asia/Manila";
 
-    const references = ["John 3:16", "Romans 10:9", "Ephesians 2:8-9", "Acts 4:12", "John 14:6", "2 Corinthians 5:17", "Romans 5:8", "Romans 6:23", "John 1:12", "Titus 3:5", "1 Peter 1:3", "Romans 8:1", "1 John 5:11-12", "John 5:24", "Galatians 2:20", "John 10:10", "Hebrews 7:25", "Romans 8:38-39", "1 John 1:9", "Psalm 103:12", "Isaiah 1:18", "Micah 7:18-19", "Ephesians 1:7", "Colossians 1:13-14", "Hebrews 8:12", "Acts 3:19", "Isaiah 43:25", "Psalm 32:1-2", "Proverbs 28:13", "Matthew 6:12", "Isaiah 53:5", "1 Peter 2:24", "Jeremiah 17:14", "Psalm 147:3", "James 5:14-15", "Psalm 103:2-3", "Exodus 15:26", "Psalm 41:3", "3 John 1:2", "Matthew 9:35", "Mark 5:34", "Malachi 4:2", "Jeremiah 29:11", "Romans 8:28", "Hebrews 10:23", "Romans 15:13", "Isaiah 40:31", "Psalm 46:1", "Joshua 1:9", "Lamentations 3:22-23", "Psalm 27:1", "Psalm 121:1-2", "Philippians 4:6-7", "Psalm 34:17-18", "Philippians 4:13", "Isaiah 41:10", "Deuteronomy 31:6", "2 Timothy 1:7", "Psalm 55:22", "1 Peter 5:7", "1 Corinthians 13:4-7", "1 John 4:7-8", "Romans 5:5", "John 13:34-35", "Colossians 3:14", "1 Corinthians 16:14", "Romans 12:9-10", "1 Peter 4:8", "Ephesians 4:2", "Galatians 5:22-23", "John 15:12", "Proverbs 10:12", "Psalm 119:105", "Matthew 11:28", "Proverbs 3:5-6", "Matthew 6:33", "James 1:5", "Hebrews 4:16", "Matthew 5:16", "Colossians 3:23", "Hebrews 12:2", "Psalm 37:4", "Ephesians 3:20", "Psalm 118:24", "Matthew 19:26", "Mark 9:23", "Luke 1:37", "John 16:33", "Romans 12:2", "2 Corinthians 12:9", "Psalm 23:1", "Psalm 23:4", "Psalm 91:1-2", "Psalm 91:9-11", "Psalm 84:11", "Psalm 34:8", "Psalm 20:7", "Psalm 1:1-3", "Proverbs 18:10", "Proverbs 16:3", "Proverbs 3:9-10", "Isaiah 26:3", "Isaiah 43:2", "Isaiah 55:6-7", "Isaiah 61:1", "Jeremiah 33:3", "Joel 2:32", "Habakkuk 3:17-19", "Zephaniah 3:17", "Matthew 7:7", "Matthew 28:19-20", "Mark 12:30-31", "Luke 6:38", "Luke 11:9-10", "John 1:1", "John 8:12", "John 11:25-26", "John 15:5", "Acts 1:8", "Acts 2:21", "Romans 1:16", "Romans 3:23-24", "Romans 8:31", "Romans 10:13", "1 Corinthians 1:18", "1 Corinthians 10:13", "2 Corinthians 4:16-18", "Galatians 6:9", "Ephesians 6:10-11", "Philippians 1:6", "Philippians 4:19", "Colossians 2:6-7", "1 Thessalonians 5:16-18", "2 Thessalonians 3:3", "1 Timothy 6:12", "2 Timothy 3:16-17", "Titus 2:11-12", "Philemon 1:6", "Hebrews 11:1", "Hebrews 12:1-2", "James 1:2-3", "James 4:8", "1 Peter 2:9", "1 Peter 3:15", "2 Peter 1:3-4", "1 John 3:1", "1 John 4:18-19", "Jude 1:24-25", "Revelation 3:20", "Revelation 21:4", "Revelation 22:17"];
+  const references = ["John 3:16", "Romans 10:9", "Ephesians 2:8-9", "Acts 4:12", "John 14:6", "2 Corinthians 5:17", "Romans 5:8", "Romans 6:23", "John 1:12", "Titus 3:5", "1 Peter 1:3", "Romans 8:1", "1 John 5:11-12", "John 5:24", "Galatians 2:20", "John 10:10", "Hebrews 7:25", "Romans 8:38-39", "1 John 1:9", "Psalm 103:12", "Isaiah 1:18", "Micah 7:18-19", "Ephesians 1:7", "Colossians 1:13-14", "Hebrews 8:12", "Acts 3:19", "Isaiah 43:25", "Psalm 32:1-2", "Proverbs 28:13", "Matthew 6:12", "Isaiah 53:5", "1 Peter 2:24", "Jeremiah 17:14", "Psalm 147:3", "James 5:14-15", "Psalm 103:2-3", "Exodus 15:26", "Psalm 41:3", "3 John 1:2", "Matthew 9:35", "Mark 5:34", "Malachi 4:2", "Jeremiah 29:11", "Romans 8:28", "Hebrews 10:23", "Romans 15:13", "Isaiah 40:31", "Psalm 46:1", "Joshua 1:9", "Lamentations 3:22-23", "Psalm 27:1", "Psalm 121:1-2", "Philippians 4:6-7", "Psalm 34:17-18", "Philippians 4:13", "Isaiah 41:10", "Deuteronomy 31:6", "2 Timothy 1:7", "Psalm 55:22", "1 Peter 5:7", "1 Corinthians 13:4-7", "1 John 4:7-8", "Romans 5:5", "John 13:34-35", "Colossians 3:14", "1 Corinthians 16:14", "Romans 12:9-10", "1 Peter 4:8", "Ephesians 4:2", "Galatians 5:22-23", "John 15:12", "Proverbs 10:12", "Psalm 119:105", "Matthew 11:28", "Proverbs 3:5-6", "Matthew 6:33", "James 1:5", "Hebrews 4:16", "Matthew 5:16", "Colossians 3:23", "Hebrews 12:2", "Psalm 37:4", "Ephesians 3:20", "Psalm 118:24", "Matthew 19:26", "Mark 9:23", "Luke 1:37", "John 16:33", "Romans 12:2", "2 Corinthians 12:9", "Psalm 23:1", "Psalm 23:4", "Psalm 91:1-2", "Psalm 91:9-11", "Psalm 84:11", "Psalm 34:8", "Psalm 20:7", "Psalm 1:1-3", "Proverbs 18:10", "Proverbs 16:3", "Proverbs 3:9-10", "Isaiah 26:3", "Isaiah 43:2", "Isaiah 55:6-7", "Isaiah 61:1", "Jeremiah 33:3", "Joel 2:32", "Habakkuk 3:17-19", "Zephaniah 3:17", "Matthew 7:7", "Matthew 28:19-20", "Mark 12:30-31", "Luke 6:38", "Luke 11:9-10", "John 1:1", "John 8:12", "John 11:25-26", "John 15:5", "Acts 1:8", "Acts 2:21", "Romans 1:16", "Romans 3:23-24", "Romans 8:31", "Romans 10:13", "1 Corinthians 1:18", "1 Corinthians 10:13", "2 Corinthians 4:16-18", "Galatians 6:9", "Ephesians 6:10-11", "Philippians 1:6", "Philippians 4:19", "Colossians 2:6-7", "1 Thessalonians 5:16-18", "2 Thessalonians 3:3", "1 Timothy 6:12", "2 Timothy 3:16-17", "Titus 2:11-12", "Philemon 1:6", "Hebrews 11:1", "Hebrews 12:1-2", "James 1:2-3", "James 4:8", "1 Peter 2:9", "1 Peter 3:15", "2 Peter 1:3-4", "1 John 3:1", "1 John 4:18-19", "Jude 1:24-25", "Revelation 3:20", "Revelation 21:4", "Revelation 22:17"];
 
-    function getManilaDate(){
-      const now = new Date();
-      const pretty = new Intl.DateTimeFormat(undefined,{ timeZone: FIXED_TIMEZONE, dateStyle:'full'}).format(now);
-      return { pretty };
+  // ---------- UI helpers ----------
+  function render({ text, reference, label, noteText, copyrightText }){
+    const verseEl = document.getElementById("verse");
+    const refEl = document.getElementById("ref");
+    const trEl = document.getElementById("trNote");
+    verseEl.textContent = text ? text : "Tap the buttons below to read the full passage.";
+    refEl.textContent = `${reference} • ${label}`;
+    trEl.textContent = copyrightText || noteText || "";
+  }
+
+  function bibleGatewayUrl(reference, version){
+    const vmap = { esv: 'ESV', nkjv: 'NKJV' };
+    return `https://www.biblegateway.com/passage/?search=${encodeURIComponent(reference)}&version=${vmap[version] || 'ESV'}`;
+  }
+
+  // ---------- Timezone-safe date + day-of-year ----------
+  function getManilaDate(){
+    const now = new Date();
+    const pretty = new Intl.DateTimeFormat(undefined,{ timeZone: FIXED_TIMEZONE, dateStyle:'full'}).format(now);
+    return { pretty };
+  }
+
+  function getTZParts(){
+    const parts = new Intl.DateTimeFormat('en-CA', {
+      timeZone: FIXED_TIMEZONE,
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit'
+    }).formatToParts(new Date());
+    const get = (type) => parts.find(p => p.type === type)?.value;
+    return { y: Number(get('year')), m: Number(get('month')), d: Number(get('day')) };
+  }
+
+  function dayOfYearInTZ(){
+    const { y, m, d } = getTZParts();
+    const start = Date.UTC(y, 0, 1);
+    const today = Date.UTC(y, m - 1, d);
+    return Math.floor((today - start) / (1000 * 60 * 60 * 24)) + 1;
+  }
+
+  function pickReference(){
+    const idx = dayOfYearInTZ() % references.length;
+    return references[idx];
+  }
+
+  // ---------- Safe fetch with timeout ----------
+  async function safeFetch(url, opts = {}, timeoutMs = 9000){
+    const ctrl = new AbortController();
+    const t = setTimeout(() => ctrl.abort(), timeoutMs);
+    try{
+      const res = await fetch(url, { ...opts, signal: ctrl.signal });
+      return res;
+    } finally {
+      clearTimeout(t);
     }
+  }
 
-    function dayOfYearInTZ(){
-      const now = new Date();
-      const tzNow = new Date(new Intl.DateTimeFormat('en-US', { timeZone: FIXED_TIMEZONE, year:'numeric', month:'2-digit', day:'2-digit', hour:'2-digit', minute:'2-digit', second:'2-digit', hour12:false }).format(now).replace(/(\d+)\/(\d+)\/(\d+), (\d+):(\d+):(\d+)/, '$3-$1-$2T$4:$5:$6'));
-      const start = new Date(tzNow.getFullYear(), 0, 0);
-      const diff = tzNow - start;
-      const oneDay = 1000*60*60*24;
-      return Math.floor(diff / oneDay);
-    }
-
-    function pickReference(){
-      const idx = dayOfYearInTZ() % references.length;
-      return references[idx];
-    }
-
-    async function fetchESV(reference){
-      const res = await fetch(`/.netlify/functions/fetch-esv?ref=${encodeURIComponent(reference)}`);
-      if(!res.ok) return { text:null, cprt:null };
+  async function fetchESV(reference){
+    try{
+      const res = await safeFetch(`/.netlify/functions/fetch-esv?ref=${encodeURIComponent(reference)}`, {}, 9000);
+      if(!res || !res.ok) return { text:null, cprt:null };
       const data = await res.json();
       const text = (data?.passages || []).join("\n").trim() || null;
       const cprt = (data?.copyright || "").trim() || null;
       return { text, cprt };
+    } catch (e){
+      return { text:null, cprt:null };
     }
+  }
 
-    async function fetchKJV(reference){
-      const url = `https://bible-api.com/${encodeURIComponent(reference)}?translation=kjv`;
-      try{ const res = await fetch(url, { cache: "no-store" }); if(!res.ok) return null; const data = await res.json(); return data?.text?.trim() || null; }
-      catch(e){ return null; }
+  async function fetchKJV(reference){
+    const url = `https://bible-api.com/${encodeURIComponent(reference)}?translation=kjv`;
+    try{
+      const res = await safeFetch(url, { cache: "no-store" }, 9000);
+      if(!res || !res.ok) return null;
+      const data = await res.json();
+      return data?.text?.trim() || null;
+    } catch (e){
+      return null;
     }
+  }
 
-    function bibleGatewayUrl(reference, version){
-      const vmap = { esv: 'ESV', nkjv: 'NKJV' };
-      return `https://www.biblegateway.com/passage/?search=${encodeURIComponent(reference)}&version=${vmap[version] || 'ESV'}`;
-    }
+  async function showToday(translation = DEFAULT_TRANSLATION){
+    document.getElementById("date").textContent = getManilaDate().pretty;
 
-    function render({ text, reference, label, noteText, copyrightText }){
-      const verseEl = document.getElementById("verse");
-      const refEl = document.getElementById("ref");
-      const trEl = document.getElementById("trNote");
-      verseEl.textContent = text ? text : "Tap the buttons below to read the full passage.";
-      refEl.textContent = `${reference} • ${label}`;
-      trEl.textContent = copyrightText || noteText || "";
-    }
+    const reference = pickReference();
+    document.getElementById("openESV").href = bibleGatewayUrl(reference, 'esv');
+    document.getElementById("openNKJV").href = bibleGatewayUrl(reference, 'nkjv');
 
-    async function showToday(translation = DEFAULT_TRANSLATION){
-      document.getElementById("date").textContent = getManilaDate().pretty;
-      const reference = pickReference();
-      document.getElementById("openESV").href = bibleGatewayUrl(reference, 'esv');
-      document.getElementById("openNKJV").href = bibleGatewayUrl(reference, 'nkjv');
+    // Always show something (even if APIs fail)
+    render({
+      text: "Loading…",
+      reference,
+      label: translation.toUpperCase(),
+      noteText: "",
+      copyrightText: ""
+    });
 
+    try{
       let label = translation.toUpperCase();
       let text = null;
       let copyrightText = "";
@@ -137,52 +272,72 @@
         copyrightText = esv.cprt || "";
         if(!text){
           text = await fetchKJV(reference);
-          noteText = "KJV text shown until ESV is available";
+          noteText = text ? "KJV text shown (ESV unavailable)" : "Text unavailable right now. Use Open in ESV/NKJV.";
         }
-      } else if(translation === 'kjv'){
+      } else {
         text = await fetchKJV(reference);
-        noteText = "";
+        noteText = text ? "" : "Text unavailable right now. Use Open in ESV/NKJV.";
       }
 
       render({ text, reference, label, noteText, copyrightText });
-    }
-
-    function setupActions(){
-      const copyBtn = document.getElementById("copyBtn");
-      copyBtn.addEventListener("click", async ()=>{
-        const t = document.getElementById("verse").innerText;
-        const r = document.getElementById("ref").innerText;
-        try{ await navigator.clipboard.writeText(`${t} — ${r}`); copyBtn.textContent = "Copied!"; setTimeout(()=>copyBtn.textContent="Copy verse", 1800); }
-        catch(e){ copyBtn.textContent = "Copy not available"; }
-      });
-
-      const shareBtn = document.getElementById("shareBtn");
-      shareBtn.addEventListener("click", async (ev)=>{
-        ev.preventDefault();
-        const text = document.getElementById("verse").innerText;
-        const ref = document.getElementById("ref").innerText;
-        const url = location.href;
-        if(navigator.share){ try{ await navigator.share({ title: "FaithCode", text: `${text} — ${ref}`, url }); }catch(e){} }
-        else{ const wa = "https://wa.me/?text=" + encodeURIComponent(`${text} — ${ref}\n${url}`); window.open(wa, "_blank"); }
-      });
-
-      const toggleBtn = document.getElementById("toggleTr");
-      toggleBtn.addEventListener("click", (ev)=>{
-        ev.preventDefault();
-        const current = (new URLSearchParams(location.search).get("tr") || DEFAULT_TRANSLATION).toLowerCase();
-        const next = TRANSLATIONS[(TRANSLATIONS.indexOf(current)+1)%TRANSLATIONS.length];
-        const url = new URL(location.href);
-        url.searchParams.set("tr", next);
-        location.href = url.toString();
+    } catch (e){
+      // Final fallback (prevents infinite Loading state)
+      render({
+        text: "Text unavailable right now. Tap “Open in ESV” or “Open in NKJV” to read the passage.",
+        reference,
+        label: translation.toUpperCase(),
+        noteText: "",
+        copyrightText: ""
       });
     }
+  }
 
-    (function init(){
-      setupActions();
-      const urlTr = new URLSearchParams(location.search).get("tr");
-      const tr = (urlTr || DEFAULT_TRANSLATION).toLowerCase();
-      showToday(tr);
-    })();
-  </script>
+  function setupActions(){
+    const copyBtn = document.getElementById("copyBtn");
+    copyBtn.addEventListener("click", async ()=>{
+      const t = document.getElementById("verse").innerText;
+      const r = document.getElementById("ref").innerText;
+      try{
+        await navigator.clipboard.writeText(`${t} — ${r}`);
+        copyBtn.textContent = "Copied!";
+        setTimeout(()=>copyBtn.textContent="Copy verse", 1800);
+      } catch(e){
+        copyBtn.textContent = "Copy not available";
+      }
+    });
+
+    const shareBtn = document.getElementById("shareBtn");
+    shareBtn.addEventListener("click", async (ev)=>{
+      ev.preventDefault();
+      const text = document.getElementById("verse").innerText;
+      const ref = document.getElementById("ref").innerText;
+      const url = location.href;
+      if(navigator.share){
+        try{ await navigator.share({ title: "FaithCode", text: `${text} — ${ref}`, url }); }catch(e){}
+      } else {
+        const wa = "https://wa.me/?text=" + encodeURIComponent(`${text} — ${ref}\n${url}`);
+        window.open(wa, "_blank");
+      }
+    });
+
+    const toggleBtn = document.getElementById("toggleTr");
+    toggleBtn.addEventListener("click", (ev)=>{
+      ev.preventDefault();
+      const current = (new URLSearchParams(location.search).get("tr") || DEFAULT_TRANSLATION).toLowerCase();
+      const next = TRANSLATIONS[(TRANSLATIONS.indexOf(current)+1)%TRANSLATIONS.length];
+      const url = new URL(location.href);
+      url.searchParams.set("tr", next);
+      location.href = url.toString();
+    });
+  }
+
+  (function init(){
+    setupActions();
+    const urlTr = new URLSearchParams(location.search).get("tr");
+    const tr = (urlTr || DEFAULT_TRANSLATION).toLowerCase();
+    showToday(tr);
+  })();
+</script>
+
 </body>
 </html>
